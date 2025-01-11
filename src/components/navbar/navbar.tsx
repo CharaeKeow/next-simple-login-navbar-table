@@ -6,6 +6,8 @@ import { LucideMenu, LucideSearch, LucideX } from "lucide-react";
 import { cn } from "@/utils/cn";
 
 import { Input } from "../input/input";
+import { buttonVariants } from "../button/button";
+import Link from "next/link";
 
 type NavbarLinks = {
   title: string;
@@ -80,7 +82,7 @@ export const Navbar = () => {
         )}
       >
         {navbarLinks.map((item, index) => (
-          <li className=" hover:text-red-500 transition-all" key={index}>
+          <li className=" hover:text-primary  transition-all" key={index}>
             <a href={item.href}>{item.title}</a>
           </li>
         ))}
@@ -91,6 +93,19 @@ export const Navbar = () => {
         type="text"
         placeholder="Search documentation..."
       />
+
+      <div
+        className={cn(
+          "px-6 pb-6 self-start lg:self-center lg:p-0 hidden lg:block",
+          isOpen && "block"
+        )}
+      >
+        {/* Note: Using buttonVariants helper to create link that looks like Button. Think the `asChild` props way using Slot looks much cleaner and easier. */}
+        {/* TODO: Shall revisit this later */}
+        <Link className={buttonVariants()} href="/login">
+          Login
+        </Link>
+      </div>
     </div>
   );
 };
