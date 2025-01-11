@@ -3,6 +3,8 @@
 // import { useState } from "react";
 import { Input } from "../input/input";
 
+import { LucideSearch, LucideX } from "lucide-react";
+
 type NavbarLinks = {
   title: string;
   href: string;
@@ -38,12 +40,17 @@ const navbarLinks: NavbarLinks[] = [
 export const Navbar = () => {
   // const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="flex justify-between py-4 px-8 border-b">
-      <div className="flex gap-6 items-center justify-start">
-        <a href="#" className="font-bold text-lg">
-          NAVBAR_TITLE
-        </a>
-        <ul className="flex gap-6 items-center">
+    <div className="flex flex-col lg:flex-row justify-between items-center gap-y-2 lg:py-4 lg:px-8 border-b">
+      <div className="flex flex-col w-full lg:flex-row gap-x-6 items-center justify-start">
+        <div className="w-full flex justify-between lg:w-fit px-6 py-4 lg:p-0 font-bold text-lg border-b lg:border-0">
+          <a href="#">NAVBAR_TITLE</a>
+          <div className="lg:hidden flex items-center gap-x-2">
+            <LucideSearch />
+            <LucideX size={28} />
+          </div>
+        </div>
+
+        <ul className="flex flex-col lg:flex-row gap-6 items-start py-4 lg:items-center w-full px-6 lg:p-0">
           {navbarLinks.map((item, index) => (
             <li className=" hover:text-red-500 transition-all" key={index}>
               <a href={item.href}>{item.title}</a>
@@ -53,7 +60,7 @@ export const Navbar = () => {
       </div>
 
       <Input
-        className="w-fit lg:w-[230px] bg-gray-50 justify-self-end"
+        className="w-fit lg:w-[230px] bg-gray-50 hidden lg:block"
         type="text"
         placeholder="Search documentation..."
       />
