@@ -6,8 +6,9 @@ import { LucideMenu, LucideSearch, LucideX } from "lucide-react";
 import { cn } from "@/utils/cn";
 
 import { Input } from "../input/input";
-import { buttonVariants } from "../button/button";
+import { Button, buttonVariants } from "../button/button";
 import Link from "next/link";
+import { useAuth } from "@/features/auth/contexts/auth-provider";
 
 type NavbarLinks = {
   title: string;
@@ -42,6 +43,8 @@ const navbarLinks: NavbarLinks[] = [
 ];
 
 export const Navbar = () => {
+  const { isAuthenticated } = useAuth();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -56,7 +59,7 @@ export const Navbar = () => {
           isOpen && "border-b"
         )}
       >
-        <a href="#">NAVBAR_TITLE</a>
+        <Link href="/">NAVBAR_TITLE</Link>
         <div
           className={cn(
             "lg:hidden flex items-center gap-x-2",
@@ -83,7 +86,9 @@ export const Navbar = () => {
       >
         {navbarLinks.map((item, index) => (
           <li className=" hover:text-primary  transition-all" key={index}>
-            <a href={item.href}>{item.title}</a>
+            <Link onClick={() => setIsOpen(false)} href={item.href}>
+              {item.title}
+            </Link>
           </li>
         ))}
       </ul>
@@ -102,9 +107,27 @@ export const Navbar = () => {
       >
         {/* Note: Using buttonVariants helper to create link that looks like Button. Think the `asChild` props way using Slot looks much cleaner and easier. */}
         {/* TODO: Shall revisit this later */}
-        <Link className={buttonVariants()} href="/login">
-          Login
-        </Link>
+        {!isAuthenticated ? (
+          <Link
+            className={buttonVariants()}
+            href="/login"
+            onClick={() => setIsOpen(false)}
+          >
+            Login
+          </Link>
+        ) : (
+          <Button
+            onClick={() => {
+              // setIsAuthenticated(false);
+              // setIsOpen(false);
+
+              // Reload the page upon logout to clear the states. In real world this implementation would depends on the auth library/method used
+              window.location.reload();
+            }}
+          >
+            Logout
+          </Button>
+        )}
       </div>
     </div>
   );
