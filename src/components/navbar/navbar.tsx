@@ -43,7 +43,7 @@ const navbarLinks: NavbarLinks[] = [
 ];
 
 export const Navbar = () => {
-  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -118,8 +118,11 @@ export const Navbar = () => {
         ) : (
           <Button
             onClick={() => {
-              setIsAuthenticated(false);
-              setIsOpen(false);
+              // setIsAuthenticated(false);
+              // setIsOpen(false);
+
+              // Reload the page upon logout to clear the states. In real world this implementation would depends on the auth library/method used
+              window.location.reload();
             }}
           >
             Logout
