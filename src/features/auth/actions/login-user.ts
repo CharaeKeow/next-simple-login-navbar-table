@@ -2,7 +2,7 @@
 
 import { PostLoginResponseError } from '@/types/api';
 import { hashPassword } from '../util/hash-password';
-import { cookies } from 'next/headers';
+import { setAuthCookie } from '@/utils/cookies';
 
 // Reference: https://nextjs.org/docs/app/building-your-application/authentication#1-capture-user-credentials
 type LoginFormState =
@@ -65,12 +65,7 @@ export async function loginUser(
   }
 
   // Set cookie to mark user as logged in
-  (await cookies()).set({
-    name: 'session',
-    value: '123xxx',
-    httpOnly: true,
-    sameSite: 'lax',
-  });
+  await setAuthCookie('123xxx');
 
   return {
     success: true,

@@ -1,10 +1,10 @@
 'use server';
 
-import { cookies } from 'next/headers';
+import { deleteAuthCookie } from '@/utils/cookies';
 
 /**
  * Server action to clear session cookie upon logging out
  */
 export async function logout() {
-  (await cookies()).delete('session');
+  await deleteAuthCookie();
 }

@@ -1,6 +1,6 @@
 import { Navbar } from '@/components/navbar/navbar';
 import { AuthProvider } from '@/features/auth/contexts/auth-provider';
-import { cookies } from 'next/headers';
+import { getAuthCookie } from '@/utils/cookies';
 
 export default async function CommonLayout({
   children,
@@ -8,7 +8,7 @@ export default async function CommonLayout({
   children: React.ReactNode;
 }) {
   // Check session from cookie
-  const session = (await cookies()).get('session');
+  const session = await getAuthCookie();
 
   return (
     <AuthProvider isAuth={session ? true : false}>
