@@ -1,3 +1,5 @@
+import { TransactionHistoryView } from "@/features/transaction-history/components/transaction-history-view/transaction-history-view";
+
 export default function TransactionHistoryPage() {
-  return <div>Transaction history page</div>;
+  return <TransactionHistoryView />;
 }
