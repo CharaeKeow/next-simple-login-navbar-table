@@ -1,5 +1,7 @@
 "use server";
 
+import { hashPassword } from "../util/hash-password";
+
 // Reference: https://nextjs.org/docs/app/building-your-application/authentication#1-capture-user-credentials
 type LoginFormState =
   | {
@@ -26,7 +28,7 @@ export async function loginUser(
 
   // A fake validation just for testing. In real world this should be handled by zod
   // TODO: Field validations using zod
-  if (password === "") {
+  if (password === "" || typeof password !== "string") {
     return {
       errors: {
         password: ["Wrong email/password"],
@@ -35,7 +37,8 @@ export async function loginUser(
     };
   }
 
-  // TODO: Encrypt the password
+  // Encrypt the password
+  const hashedPassword = await hashPassword(password);
 
   return {
     success: true,
