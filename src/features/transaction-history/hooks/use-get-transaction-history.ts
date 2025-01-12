@@ -1,8 +1,8 @@
 import {
   GetTransactionHistoryError,
   GetTransactionHistorySuccess,
-} from "@/types/api";
-import { useQuery } from "@tanstack/react-query";
+} from '@/types/api';
+import { useQuery } from '@tanstack/react-query';
 
 type UseGetTransactionHistoryParams = {
   enabled?: boolean;
@@ -15,9 +15,9 @@ export const useGetTransactionHistory = ({
   enabled = true,
 }: UseGetTransactionHistoryParams) => {
   return useQuery({
-    queryKey: ["transaction-history"],
+    queryKey: ['transaction-history'],
     queryFn: async () => {
-      const res = await fetch("/api/transaction-history");
+      const res = await fetch('/api/transaction-history');
 
       if (res.status === 500) {
         const resData: GetTransactionHistoryError = await res.json();

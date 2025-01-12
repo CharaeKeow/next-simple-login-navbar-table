@@ -1,4 +1,4 @@
-import { TransactionHistory } from "@/features/transaction-history/types";
+import { TransactionHistory } from '@/features/transaction-history/types';
 
 type ApiErrorResponse = { message: string };
 

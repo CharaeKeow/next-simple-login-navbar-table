@@ -3,6 +3,6 @@ export type TransactionHistory = {
   transactionId: string;
   recipient: string;
   recipientReference: string;
-  type: "DuitNow Payment" | "Bank Transfer";
+  type: 'DuitNow Payment' | 'Bank Transfer';
   amount: number;
 };

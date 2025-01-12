@@ -2,8 +2,8 @@ import {
   GetSecureWordRequestBody,
   GetSecureWordRequestResponseError,
   GetSecureWordRequestResponseSuccess,
-} from "@/types/api";
-import { NextRequest, NextResponse } from "next/server";
+} from '@/types/api';
+import { NextRequest, NextResponse } from 'next/server';
 
 // Note: In real world, this could be something like a Typespec generated type
 
@@ -20,14 +20,14 @@ export const POST = async (
 
     console.log({ requestBody });
 
-    return NextResponse.json({ secureWord: "secure123" }, { status: 200 });
+    return NextResponse.json({ secureWord: 'secure123' }, { status: 200 });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message }, { status: 500 });
     }
 
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       { status: 500 }
     );
   }

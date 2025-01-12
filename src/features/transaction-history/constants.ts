@@ -1,4 +1,4 @@
-import { TransactionHistory } from "./types";
+import { TransactionHistory } from './types';
 
 type Column<T> = {
   key: keyof T;
@@ -7,23 +7,23 @@ type Column<T> = {
 
 export const TRANSACTIONS_TABLE_COLUMNS: Column<TransactionHistory>[] = [
   {
-    key: "date",
-    label: "Date",
+    key: 'date',
+    label: 'Date',
   },
   {
-    key: "transactionId",
-    label: "Reference ID",
+    key: 'transactionId',
+    label: 'Reference ID',
   },
   {
-    key: "recipient",
-    label: "To",
+    key: 'recipient',
+    label: 'To',
   },
   {
-    key: "type",
-    label: "Transaction Type",
+    key: 'type',
+    label: 'Transaction Type',
   },
   {
-    key: "amount",
-    label: "Amount",
+    key: 'amount',
+    label: 'Amount',
   },
 ] as const;

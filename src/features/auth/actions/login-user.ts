@@ -1,7 +1,8 @@
-"use server";
+'use server';
 
-import { PostLoginResponseError } from "@/types/api";
-import { hashPassword } from "../util/hash-password";
+import { PostLoginResponseError } from '@/types/api';
+import { hashPassword } from '../util/hash-password';
+import { setAuthCookie } from '@/utils/cookies';
 
 // Reference: https://nextjs.org/docs/app/building-your-application/authentication#1-capture-user-credentials
 type LoginFormState =
@@ -22,17 +23,17 @@ export async function loginUser(
   state: LoginFormState,
   formData: FormData
 ): Promise<LoginFormState> {
-  const username = formData.get("username");
-  const password = formData.get("password");
+  const username = formData.get('username');
+  const password = formData.get('password');
 
   console.log({ username, password });
 
   // A fake validation just for testing. In real world this should be handled by zod
   // TODO: Field validations using zod
-  if (password === "" || typeof password !== "string") {
+  if (password === '' || typeof password !== 'string') {
     return {
       errors: {
-        password: ["Wrong username/password"],
+        password: ['Wrong username/password'],
       },
       success: false,
     };
@@ -42,9 +43,9 @@ export async function loginUser(
   const hashedPassword = await hashPassword(password);
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/login`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       username,
@@ -62,6 +63,9 @@ export async function loginUser(
       },
     };
   }
+
+  // Set cookie to mark user as logged in
+  await setAuthCookie('123xxx');
 
   return {
     success: true,

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useAuth } from "@/features/auth/contexts/auth-provider";
-import { redirect } from "next/navigation";
-import { useGetTransactionHistory } from "../../hooks/use-get-transaction-history";
-import { TRANSACTIONS_TABLE_COLUMNS } from "../../constants";
-import { formatDate } from "../../utils/format-date";
+// import { useAuth } from '@/features/auth/contexts/auth-provider';
+// import { redirect } from 'next/navigation';
+import { useGetTransactionHistory } from '../../hooks/use-get-transaction-history';
+import { TRANSACTIONS_TABLE_COLUMNS } from '../../constants';
+import { formatDate } from '../../utils/format-date';
 import {
   Table,
   TableBody,
@@ -12,11 +12,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/table/table";
-import { cn } from "@/utils/cn";
+} from '@/components/table/table';
+import { cn } from '@/utils/cn';
 
 export const TransactionHistoryView = () => {
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
 
   // Opted to fetch transaction history data on client side instead since auth state is only available on the client
   // (as we're using provider). Setting `enabled` to `false` means the transaction data won't be fetched unless
@@ -28,12 +28,6 @@ export const TransactionHistoryView = () => {
   } = useGetTransactionHistory({
     enabled: true,
   });
-
-  // Ideally auth check this should sits in middleware layer or server component. But for the purpose of this test app,
-  // we're just doing the check on client side
-  if (!isAuthenticated) {
-    redirect("/login");
-  }
 
   if (isLoading) {
     return <div>Fetching transactions data...</div>;
@@ -50,7 +44,7 @@ export const TransactionHistoryView = () => {
           <TableRow>
             {TRANSACTIONS_TABLE_COLUMNS.map((header) => (
               <TableHead
-                className={cn(header.key === "amount" && "text-right pr-6")}
+                className={cn(header.key === 'amount' && 'text-right pr-6')}
                 key={header.key}
               >
                 {header.label}

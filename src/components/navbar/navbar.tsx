@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { LucideMenu, LucideSearch, LucideX } from "lucide-react";
+import { useState } from 'react';
+import { LucideMenu, LucideSearch, LucideX } from 'lucide-react';
 
-import { cn } from "@/utils/cn";
+import { cn } from '@/utils/cn';
 
-import { Input } from "../input/input";
-import { Button, buttonVariants } from "../button/button";
-import Link from "next/link";
-import { useAuth } from "@/features/auth/contexts/auth-provider";
+import { Input } from '../input/input';
+import { Button, buttonVariants } from '../button/button';
+import Link from 'next/link';
+import { useAuth } from '@/features/auth/contexts/auth-provider';
+import { logout } from '@/action/logout';
 
 type NavbarLinks = {
   title: string;
@@ -17,28 +18,28 @@ type NavbarLinks = {
 
 const navbarLinks: NavbarLinks[] = [
   {
-    title: "Showcase",
-    href: "#",
+    title: 'Showcase',
+    href: '#',
   },
   {
-    title: "Docs",
-    href: "#",
+    title: 'Docs',
+    href: '#',
   },
   {
-    title: "Blog",
-    href: "#",
+    title: 'Blog',
+    href: '#',
   },
   {
-    title: "Analytics",
-    href: "#",
+    title: 'Analytics',
+    href: '#',
   },
   {
-    title: "Templates",
-    href: "#",
+    title: 'Templates',
+    href: '#',
   },
   {
-    title: "Enterprise",
-    href: "#",
+    title: 'Enterprise',
+    href: '#',
   },
 ];
 
@@ -55,15 +56,15 @@ export const Navbar = () => {
     <div className="flex gap-x-6 flex-col lg:flex-row justify-between items-center lg:py-4 lg:px-8 border-b">
       <div
         className={cn(
-          "w-full flex justify-between lg:w-fit px-6 py-4 lg:p-0 font-bold text-lg lg:border-0",
-          isOpen && "border-b"
+          'w-full flex justify-between lg:w-fit px-6 py-4 lg:p-0 font-bold text-lg lg:border-0',
+          isOpen && 'border-b'
         )}
       >
         <Link href="/">NAVBAR_TITLE</Link>
         <div
           className={cn(
-            "lg:hidden flex items-center gap-x-2",
-            isOpen ? "flex" : "hidden"
+            'lg:hidden flex items-center gap-x-2',
+            isOpen ? 'flex' : 'hidden'
           )}
         >
           <LucideSearch />
@@ -73,15 +74,15 @@ export const Navbar = () => {
         {/* Hamburger menu */}
         {/* TODO: Accessibility? Maybe should wrap this inside button? */}
         <LucideMenu
-          className={cn("lg:hidden", isOpen ? "hidden" : "flex")}
+          className={cn('lg:hidden', isOpen ? 'hidden' : 'flex')}
           onClick={toggleMenu}
         />
       </div>
 
       <ul
         className={cn(
-          "lg:flex flex-col lg:flex-row gap-6 items-start py-4 lg:items-center w-full px-6 lg:p-0",
-          isOpen ? "flex" : "hidden"
+          'lg:flex flex-col lg:flex-row gap-6 items-start py-4 lg:items-center w-full px-6 lg:p-0',
+          isOpen ? 'flex' : 'hidden'
         )}
       >
         {navbarLinks.map((item, index) => (
@@ -101,8 +102,8 @@ export const Navbar = () => {
 
       <div
         className={cn(
-          "px-6 pb-6 self-start lg:self-center lg:p-0 hidden lg:block",
-          isOpen && "block"
+          'px-6 pb-6 self-start lg:self-center lg:p-0 hidden lg:block',
+          isOpen && 'block'
         )}
       >
         {/* Note: Using buttonVariants helper to create link that looks like Button. Think the `asChild` props way using Slot looks much cleaner and easier. */}
@@ -117,9 +118,8 @@ export const Navbar = () => {
           </Link>
         ) : (
           <Button
-            onClick={() => {
-              // setIsAuthenticated(false);
-              // setIsOpen(false);
+            onClick={async () => {
+              await logout();
 
               // Reload the page upon logout to clear the states. In real world this implementation would depends on the auth library/method used
               window.location.reload();

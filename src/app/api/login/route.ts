@@ -2,8 +2,8 @@ import {
   PostLoginRequestBody,
   PostLoginResponseError,
   PostLoginResponseSuccess,
-} from "@/types/api";
-import { NextRequest, NextResponse } from "next/server";
+} from '@/types/api';
+import { NextRequest, NextResponse } from 'next/server';
 
 export const POST = async (
   request: NextRequest
@@ -22,7 +22,7 @@ export const POST = async (
     }
 
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       { status: 500 }
     );
   }
