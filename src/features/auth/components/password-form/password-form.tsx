@@ -1,23 +1,32 @@
 import { Input } from "@/components/input/input";
 import { loginUser } from "../../actions/login-user";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useAuth } from "../../contexts/auth-provider";
 import { Button } from "@/components/button/button";
+import { useRouter } from "next/navigation";
 
 export const PasswordForm = () => {
-  const { loginStep, username } = useAuth();
+  const { loginStep, username, setIsAuthenticated } = useAuth();
+  const router = useRouter();
 
   const [state, formAction] = useActionState(loginUser, undefined);
 
   console.log({ loginStep });
   console.log({ state });
 
-  // On dev mode this will be invoked twice, due to strict mode. But on prod, it will be invoked just once (tested)
-  // Another way to go with this is to use `onSubmit` on form instead, which allow us to `await` server action
-  // Though not sure which one is the "right" approach for password field
-  if (state && state.success) {
-    console.log("Login successful");
-  }
+  useEffect(() => {
+    // On dev mode this will be invoked twice, due to strict mode. But on prod, it will be invoked just once (tested)
+    // Another way to go with this is to use `onSubmit` on form instead, which allow us to `await` server action and set state inside
+    // there instead of relying on `useEffect`
+    // TODO: Refactor this to using `onSubmit` later if got time
+    if (state && state.success) {
+      setIsAuthenticated(true);
+      // TODO: Add a simple toast for displaying login successful message
+
+      // Redirect to `transaction-history` page
+      router.push("/transaction-history");
+    }
+  }, [router, setIsAuthenticated, state]);
 
   return (
     <form action={formAction} className="flex flex-col items-center gap-y-4">
