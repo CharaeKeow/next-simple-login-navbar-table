@@ -1,34 +1,34 @@
-import { TransactionHistory } from "@/features/transaction-history/types";
+import { TransactionHistory } from '@/features/transaction-history/types';
 import {
   GetTransactionHistoryError,
   GetTransactionHistorySuccess,
-} from "@/types/api";
-import { NextResponse } from "next/server";
+} from '@/types/api';
+import { NextResponse } from 'next/server';
 
 const mockTransactionHistoryData: TransactionHistory[] = [
   {
-    date: new Date("12-08-2023"),
+    date: new Date('12-08-2023'),
     amount: 400,
-    recipient: "BloomThis",
-    recipientReference: "Flower payment",
-    transactionId: "123-123-123",
-    type: "Bank Transfer",
+    recipient: 'BloomThis',
+    recipientReference: 'Flower payment',
+    transactionId: '123-123-123',
+    type: 'Bank Transfer',
   },
   {
-    date: new Date("07-13-2023"),
+    date: new Date('07-13-2023'),
     amount: 150,
-    recipient: "MARA",
-    recipientReference: "Study loan payment",
-    transactionId: "321-123-321",
-    type: "Bank Transfer",
+    recipient: 'MARA',
+    recipientReference: 'Study loan payment',
+    transactionId: '321-123-321',
+    type: 'Bank Transfer',
   },
   {
-    date: new Date("12-09-2023"),
+    date: new Date('12-09-2023'),
     amount: 10,
-    recipient: "Mr. X",
-    recipientReference: "Lunch (nasi goreng kampung)",
-    transactionId: "888-999-123",
-    type: "DuitNow Payment",
+    recipient: 'Mr. X',
+    recipientReference: 'Lunch (nasi goreng kampung)',
+    transactionId: '888-999-123',
+    type: 'DuitNow Payment',
   },
 ];
 
@@ -47,7 +47,7 @@ export const GET = async (): Promise<
     }
 
     return NextResponse.json(
-      { message: "Something went wrong" },
+      { message: 'Something went wrong' },
       { status: 500 }
     );
   }

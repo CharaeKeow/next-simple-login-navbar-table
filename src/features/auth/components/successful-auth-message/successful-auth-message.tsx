@@ -1,6 +1,6 @@
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useAuth } from "../../contexts/auth-provider";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../contexts/auth-provider';
 
 const SUCCESSFUL_COUNTDOWN_REDIRECT_IN_SECONDS = 3;
 
@@ -33,7 +33,7 @@ export const SuccessfulAuthMessage = () => {
   useEffect(() => {
     if (isAuthenticated && countdown === 0) {
       // Redirect to `transaction-history` page
-      router.push("/transaction-history");
+      router.push('/transaction-history');
     }
   }, [countdown, isAuthenticated, router]);
 

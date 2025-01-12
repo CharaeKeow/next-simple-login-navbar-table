@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
 import {
   createContext,
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
-} from "react";
+} from 'react';
 
-type LoginStep = "username" | "secureWord" | "password" | "success";
+type LoginStep = 'username' | 'secureWord' | 'password' | 'success';
 
 type AuthContextType = {
   secureWord: string | undefined;
@@ -23,20 +24,25 @@ type AuthContextType = {
 };
 
 type AuthProviderProps = {
+  isAuth: boolean;
   children: React.ReactNode;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ isAuth, children }: AuthProviderProps) => {
   const [secureWord, setSecureWord] =
-    useState<AuthContextType["secureWord"]>(undefined);
-  const [username, setUsername] = useState<AuthContextType["username"]>("");
-  const [loginStep, setLoginStep] = useState<LoginStep>("username"); // login step will always start with username
+    useState<AuthContextType['secureWord']>(undefined);
+  const [username, setUsername] = useState<AuthContextType['username']>('');
+  const [loginStep, setLoginStep] = useState<LoginStep>('username'); // login step will always start with username
 
   // Note: In real world, this would be a state provided by library. E.g. if using Auth.js, we can obtain this from `useSession` hook at client
   // Since this is just a test app, I resorted to just do this in this provider for simplicity's sake
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(isAuth ?? false);
+
+  useEffect(() => {
+    setIsAuthenticated(isAuth);
+  }, [isAuth]);
 
   const value: AuthContextType = {
     secureWord,
@@ -56,7 +62,7 @@ export const useAuth = () => {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error("useAuthContext must be used within an AuthProvider");
+    throw new Error('useAuthContext must be used within an AuthProvider');
   }
 
   return context;

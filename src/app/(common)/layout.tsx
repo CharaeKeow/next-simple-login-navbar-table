@@ -1,13 +1,17 @@
-import { Navbar } from "@/components/navbar/navbar";
-import { AuthProvider } from "@/features/auth/contexts/auth-provider";
+import { Navbar } from '@/components/navbar/navbar';
+import { AuthProvider } from '@/features/auth/contexts/auth-provider';
+import { cookies } from 'next/headers';
 
-export default function CommonLayout({
+export default async function CommonLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Check session from cookie
+  const session = (await cookies()).get('session');
+
   return (
-    <AuthProvider>
+    <AuthProvider isAuth={session ? true : false}>
       <Navbar />
       {children}
     </AuthProvider>

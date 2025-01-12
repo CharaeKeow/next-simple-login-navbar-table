@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { Input } from "@/components/input/input";
-import { FormEvent } from "react";
-import { Button } from "@/components/button/button";
+import { Input } from '@/components/input/input';
+import { FormEvent } from 'react';
+import { Button } from '@/components/button/button';
 import {
   GetSecureWordRequestResponseError,
   GetSecureWordRequestResponseSuccess,
-} from "@/types/api";
-import { useAuth } from "../../contexts/auth-provider";
+} from '@/types/api';
+import { useAuth } from '../../contexts/auth-provider';
 
 export const UsernameForm = () => {
   // Note: Ideally should use `react-hook-form`, but for simplicity let's use `useState` for now
@@ -16,10 +16,10 @@ export const UsernameForm = () => {
   const handleSubmitUsername = async (e: FormEvent) => {
     e.preventDefault();
 
-    const res = await fetch("/api/getSecureWord", {
-      method: "POST",
+    const res = await fetch('/api/getSecureWord', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         username,
@@ -29,13 +29,13 @@ export const UsernameForm = () => {
     // TODO: Display this error to user if time permits. This is when react-hook-form will really comes in handy
     if (res.status !== 200) {
       const resData: GetSecureWordRequestResponseError = await res.json();
-      console.log("Error getting secure word: ", resData.message);
+      console.log('Error getting secure word: ', resData.message);
       return;
     }
 
     const resData: GetSecureWordRequestResponseSuccess = await res.json();
     setSecureWord(resData.secureWord);
-    setLoginStep("secureWord");
+    setLoginStep('secureWord');
   };
 
   return (

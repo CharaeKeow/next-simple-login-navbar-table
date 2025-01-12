@@ -1,8 +1,8 @@
-import { Input } from "@/components/input/input";
-import { loginUser } from "../../actions/login-user";
-import { useActionState, useEffect } from "react";
-import { useAuth } from "../../contexts/auth-provider";
-import { Button } from "@/components/button/button";
+import { Input } from '@/components/input/input';
+import { loginUser } from '../../actions/login-user';
+import { useActionState, useEffect } from 'react';
+import { useAuth } from '../../contexts/auth-provider';
+import { Button } from '@/components/button/button';
 
 export const PasswordForm = () => {
   const { loginStep, username, setIsAuthenticated, setLoginStep } = useAuth();
@@ -19,7 +19,7 @@ export const PasswordForm = () => {
     // TODO: Refactor this to using `onSubmit` later if got time
     if (state && state.success) {
       setIsAuthenticated(true);
-      setLoginStep("success");
+      setLoginStep('success');
     }
   }, [setIsAuthenticated, setLoginStep, state]);
 
