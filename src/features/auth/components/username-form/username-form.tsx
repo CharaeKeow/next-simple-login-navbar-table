@@ -1,19 +1,17 @@
 "use client";
 
 import { Input } from "@/components/input/input";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { Button } from "@/components/button/button";
 import {
   GetSecureWordRequestResponseError,
   GetSecureWordRequestResponseSuccess,
 } from "@/types/api";
+import { useAuth } from "../../contexts/auth-provider";
 
 export const UsernameForm = () => {
   // Note: Ideally should use `react-hook-form`, but for simplicity let's use `useState` for now
-  const [username, setUsername] = useState<string>("");
-
-  // TODO: Lift this up, so the logic can be done in a parent component. Nice use case for Context & Provider
-  const [secureWord, setSecureWord] = useState<string | null>(null);
+  const { username, setUsername, setSecureWord, setLoginStep } = useAuth();
 
   const handleSubmitUsername = async (e: FormEvent) => {
     e.preventDefault();
@@ -32,10 +30,12 @@ export const UsernameForm = () => {
     if (res.status !== 200) {
       const resData: GetSecureWordRequestResponseError = await res.json();
       console.log("Error getting secure word: ", resData.message);
+      return;
     }
 
     const resData: GetSecureWordRequestResponseSuccess = await res.json();
     setSecureWord(resData.secureWord);
+    setLoginStep("secureWord");
   };
 
   return (
@@ -54,12 +54,6 @@ export const UsernameForm = () => {
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-
-      {secureWord ? (
-        <div>
-          Secure Word: <span className="font-bold italic">{secureWord}</span>
-        </div>
-      ) : null}
 
       <Button
         type="submit"
