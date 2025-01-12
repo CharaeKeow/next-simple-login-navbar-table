@@ -86,7 +86,9 @@ export const Navbar = () => {
       >
         {navbarLinks.map((item, index) => (
           <li className=" hover:text-primary  transition-all" key={index}>
-            <a href={item.href}>{item.title}</a>
+            <Link onClick={() => setIsOpen(false)} href={item.href}>
+              {item.title}
+            </Link>
           </li>
         ))}
       </ul>
@@ -106,13 +108,18 @@ export const Navbar = () => {
         {/* Note: Using buttonVariants helper to create link that looks like Button. Think the `asChild` props way using Slot looks much cleaner and easier. */}
         {/* TODO: Shall revisit this later */}
         {!isAuthenticated ? (
-          <Link className={buttonVariants()} href="/login">
+          <Link
+            className={buttonVariants()}
+            href="/login"
+            onClick={() => setIsOpen(false)}
+          >
             Login
           </Link>
         ) : (
           <Button
             onClick={() => {
               setIsAuthenticated(false);
+              setIsOpen(false);
             }}
           >
             Logout
