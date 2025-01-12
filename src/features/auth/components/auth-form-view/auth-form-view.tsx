@@ -4,9 +4,11 @@ import { Button } from "@/components/button/button";
 import { useAuth } from "../../contexts/auth-provider";
 import { UsernameForm } from "../username-form/username-form";
 import { PasswordForm } from "../password-form/password-form";
+import { SuccessfulAuthMessage } from "../successful-auth-message/successful-auth-message";
 
 export const AuthFormView = () => {
-  const { secureWord, username, loginStep, setLoginStep } = useAuth();
+  const { secureWord, username, loginStep, isAuthenticated, setLoginStep } =
+    useAuth();
 
   return (
     <div>
@@ -26,6 +28,8 @@ export const AuthFormView = () => {
           {loginStep === "password" ? <PasswordForm /> : null}
         </div>
       ) : null}
+
+      {isAuthenticated ? <SuccessfulAuthMessage /> : null}
     </div>
   );
 };

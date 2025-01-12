@@ -3,11 +3,9 @@ import { loginUser } from "../../actions/login-user";
 import { useActionState, useEffect } from "react";
 import { useAuth } from "../../contexts/auth-provider";
 import { Button } from "@/components/button/button";
-import { useRouter } from "next/navigation";
 
 export const PasswordForm = () => {
-  const { loginStep, username, setIsAuthenticated } = useAuth();
-  const router = useRouter();
+  const { loginStep, username, setIsAuthenticated, setLoginStep } = useAuth();
 
   const [state, formAction] = useActionState(loginUser, undefined);
 
@@ -21,12 +19,9 @@ export const PasswordForm = () => {
     // TODO: Refactor this to using `onSubmit` later if got time
     if (state && state.success) {
       setIsAuthenticated(true);
-      // TODO: Add a simple toast for displaying login successful message
-
-      // Redirect to `transaction-history` page
-      router.push("/transaction-history");
+      setLoginStep("success");
     }
-  }, [router, setIsAuthenticated, state]);
+  }, [setIsAuthenticated, setLoginStep, state]);
 
   return (
     <form action={formAction} className="flex flex-col items-center gap-y-4">
