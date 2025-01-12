@@ -7,6 +7,9 @@ import { useGetTransactionHistory } from "../../hooks/use-get-transaction-histor
 export const TransactionHistoryView = () => {
   const { isAuthenticated } = useAuth();
 
+  // Opted to fetch transaction history data on client side instead since auth state is only available on the client
+  // (as we're using provider). Setting `enabled` to `false` means the transaction data won't be fetched unless
+  // user is authenticated
   const { data, isLoading, error } = useGetTransactionHistory({
     enabled: isAuthenticated,
   });

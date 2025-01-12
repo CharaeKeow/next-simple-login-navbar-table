@@ -5,9 +5,12 @@ import {
 import { useQuery } from "@tanstack/react-query";
 
 type UseGetTransactionHistoryParams = {
-  enabled: boolean | undefined;
+  enabled?: boolean;
 };
 
+/**
+ * A custom hook fetch transaction-history data
+ */
 export const useGetTransactionHistory = ({
   enabled = true,
 }: UseGetTransactionHistoryParams) => {
