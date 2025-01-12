@@ -11,7 +11,7 @@ const mockTransactionHistoryData: TransactionHistory[] = [
     amount: 400,
     recipient: "BloomThis",
     recipientReference: "Flower payment",
-    referenceId: "123-123-123",
+    transactionId: "123-123-123",
     type: "Bank Transfer",
   },
   {
@@ -19,7 +19,7 @@ const mockTransactionHistoryData: TransactionHistory[] = [
     amount: 150,
     recipient: "MARA",
     recipientReference: "Study loan payment",
-    referenceId: "321-123-321",
+    transactionId: "321-123-321",
     type: "Bank Transfer",
   },
   {
@@ -27,7 +27,7 @@ const mockTransactionHistoryData: TransactionHistory[] = [
     amount: 10,
     recipient: "Mr. X",
     recipientReference: "Lunch (nasi goreng kampung)",
-    referenceId: "888-999-123",
+    transactionId: "888-999-123",
     type: "DuitNow Payment",
   },
 ];
