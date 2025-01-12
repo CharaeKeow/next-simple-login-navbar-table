@@ -26,7 +26,7 @@ export async function loginUser(
 
   // A fake validation just for testing. In real world this should be handled by zod
   // TODO: Field validations using zod
-  if (!password) {
+  if (password === "") {
     return {
       errors: {
         password: ["Wrong email/password"],
