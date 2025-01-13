@@ -5,12 +5,9 @@ import { useAuth } from '../../contexts/auth-provider';
 import { Button } from '@/components/button/button';
 
 export const PasswordForm = () => {
-  const { loginStep, username, setIsAuthenticated, setLoginStep } = useAuth();
+  const { username, setIsAuthenticated, setLoginStep } = useAuth();
 
   const [state, formAction] = useActionState(loginUser, undefined);
-
-  console.log({ loginStep });
-  console.log({ state });
 
   useEffect(() => {
     // On dev mode this will be invoked twice, due to strict mode. But on prod, it will be invoked just once (tested)

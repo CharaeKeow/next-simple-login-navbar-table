@@ -18,7 +18,7 @@ export const POST = async (
     // Get username from request body. No need to do anything since the validation for the username is out of the scope for this app
     const requestBody: GetSecureWordRequestBody = await request.json();
 
-    console.log({ requestBody });
+    console.log({ requestBody }); // remained to silent TS error
 
     return NextResponse.json({ secureWord: 'secure123' }, { status: 200 });
   } catch (error) {

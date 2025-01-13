@@ -11,7 +11,7 @@ export const POST = async (
   try {
     const requestBody: PostLoginRequestBody = await request.json();
 
-    console.log({ requestBody });
+    console.log({ requestBody }); // remained to silent TS error
 
     // This would be the logic to verify user, compare password, etc. Out of scope for this app
 

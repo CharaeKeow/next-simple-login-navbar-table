@@ -26,8 +26,6 @@ export async function loginUser(
   const username = formData.get('username');
   const password = formData.get('password');
 
-  console.log({ username, password });
-
   // A fake validation just for testing. In real world this should be handled by zod
   // TODO: Field validations using zod
   if (password === '' || typeof password !== 'string') {
