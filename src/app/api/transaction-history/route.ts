@@ -3,6 +3,7 @@ import {
   GetTransactionHistoryError,
   GetTransactionHistorySuccess,
 } from '@/types/api';
+import { getAuthCookie } from '@/utils/cookies';
 import { NextResponse } from 'next/server';
 
 const mockTransactionHistoryData: TransactionHistory[] = [
@@ -32,11 +33,21 @@ const mockTransactionHistoryData: TransactionHistory[] = [
   },
 ];
 
-// Note: Ideally this API route should be auth protected, but that is out of scope of this app
 export const GET = async (): Promise<
   NextResponse<GetTransactionHistorySuccess | GetTransactionHistoryError>
 > => {
   try {
+    const session = await getAuthCookie();
+
+    if (!session) {
+      return NextResponse.json(
+        {
+          message: 'Unauthorized',
+        },
+        { status: 401 }
+      );
+    }
+
     return NextResponse.json(
       { transactions: mockTransactionHistoryData },
       { status: 200 }
